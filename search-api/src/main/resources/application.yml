@@ -1,0 +1,12 @@
+server:
+  # 8088 thay vi 8080/3000 de tranh dung voi cac service khac hay chay san tren may.
+  port: ${SERVER_PORT:8088}
+
+app:
+  lucene:
+    # Thu muc luu Lucene index, nam trong search-api/ (coi search-api la 1 repo nho, tu chua).
+    index-dir: ${LUCENE_INDEX_DIR:data/index}
+  data:
+    # Thu muc chua file .txt/.doc/.docx/.json de import hang loat qua /api/documents/import-raw
+    # hoac qua CLI (profile "cli", lenh "index"). Cung nam trong search-api/.
+    raw-dir: ${RAW_DATA_DIR:data/raw}

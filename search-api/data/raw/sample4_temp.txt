@@ -1,0 +1,2 @@
+Day la file tam de test lai luong index sau khi sua CORS va doi port ve 8088.
+Tu khoa rieng de kiem tra: BTLTESTKEYWORD.

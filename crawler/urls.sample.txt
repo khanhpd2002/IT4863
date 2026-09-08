@@ -1,0 +1,4 @@
+# Vi du danh sach URL cho crawler.py - moi dong 1 URL, dong bat dau '#' bi bo qua.
+# Doi lai bang link that truoc khi demo.
+https://en.wikipedia.org/wiki/Apache_Lucene
+https://hust.edu.vn/

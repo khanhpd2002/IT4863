@@ -1,0 +1,4 @@
+Spring Boot la mot framework cua Spring giup xay dung ung dung Java nhanh chong, giam thieu
+cau hinh thu cong. Spring Boot 3 yeu cau toi thieu Java 17 va tuong thich tot voi Java 21.
+Ung dung Spring Boot co the expose REST API de tich hop voi cac he thong khac, hoac chay o
+che do CLI thong qua CommandLineRunner.

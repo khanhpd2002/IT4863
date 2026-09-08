@@ -1,0 +1,5 @@
+Apache Lucene la mot thu vien tim kiem toan van (full-text search) ma nguon mo viet bang Java.
+Lucene cung cap cac thanh phan de xay dung chi muc (index) va thuc hien truy van (query) tren
+tap van ban lon. TF-IDF (Term Frequency - Inverse Document Frequency) la mot phuong phap
+danh trong so tu pho bien, dung de danh gia mot tu quan trong nhu the nao doi voi mot tai lieu
+trong tap van ban.

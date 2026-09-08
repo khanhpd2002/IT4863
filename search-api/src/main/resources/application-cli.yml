@@ -1,0 +1,7 @@
+# Profile "cli": tat web server, chay xong lenh la thoat, phuc vu demo nhanh tren terminal.
+# Vi du:
+#   mvn spring-boot:run -Dspring-boot.run.profiles=cli -Dspring-boot.run.arguments=index
+#   mvn spring-boot:run -Dspring-boot.run.profiles=cli -Dspring-boot.run.arguments="search,may tinh"
+spring:
+  main:
+    web-application-type: none

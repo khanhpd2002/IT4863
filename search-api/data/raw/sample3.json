@@ -1,0 +1,11 @@
+[
+  {
+    "id": "sample3-a",
+    "title": "Web crawler co ban",
+    "content": "Mot web crawler nhan vao danh sach URL, tai noi dung HTML, roi trich xuat tieu de, noi dung van ban chinh va cac lien ket di ra kem van ban mo ta. Du lieu trich xuat duoc co the dung lam dau vao cho he thong tim kiem.",
+    "outlinks": [
+      {"url": "https://example.com/lucene", "text": "Tim hieu ve Lucene"},
+      {"url": "https://example.com/tfidf", "text": "TF-IDF la gi"}
+    ]
+  }
+]

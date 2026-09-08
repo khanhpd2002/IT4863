@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Demo tìm kiếm TF-IDF</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 720px; margin: 40px auto; padding: 0 16px; color: #222; }
+  h1 { font-size: 1.25rem; }
+  .search-bar { display: flex; gap: 8px; margin-bottom: 16px; }
+  #q { flex: 1; padding: 8px; font-size: 1rem; }
+  button { padding: 8px 16px; cursor: pointer; }
+  .result { border-bottom: 1px solid #ddd; padding: 12px 0; }
+  .result strong { font-size: 1.05rem; }
+  .score { color: #888; font-size: 0.85rem; margin-left: 8px; }
+  .error { color: #b00020; }
+</style>
+</head>
+<body>
+<h1>Demo tìm kiếm TF-IDF (BTL IT4863)</h1>
+<div class="search-bar">
+  <input id="q" type="text" placeholder="Nhập từ khoá...">
+  <button onclick="doSearch()">Tìm kiếm</button>
+</div>
+<div id="results"></div>
+
+<script>
+// Hardcode host:port cua search-api. Khong dung window.location.origin vi khi mo file nay
+// truc tiep bang file:// (khong qua static server), origin se la "file://" thay vi
+// "http://localhost:8088", khien fetch goi nham thanh "file:///api/search?...".
+// Doi lai neu search-api chay o host/port khac.
+const API_BASE = 'http://localhost:8088';
+
+async function doSearch() {
+  const q = document.getElementById('q').value.trim();
+  const resultsEl = document.getElementById('results');
+  if (!q) { resultsEl.innerHTML = ''; return; }
+  resultsEl.textContent = 'Đang tìm...';
+  try {
+    const res = await fetch(`${API_BASE}/api/search?q=${encodeURIComponent(q)}&topN=10`);
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error || 'Lỗi không xác định');
+    if (data.length === 0) { resultsEl.innerHTML = '<p>Không có kết quả.</p>'; return; }
+    resultsEl.innerHTML = data.map(r => `
+      <div class="result">
+        <strong>${escapeHtml(r.title)}</strong><span class="score">score=${r.score.toFixed(4)} (id=${escapeHtml(r.id)})</span>
+        <p>${escapeHtml(r.snippet)}</p>
+      </div>
+    `).join('');
+  } catch (err) {
+    resultsEl.innerHTML = `<p class="error">Lỗi: ${escapeHtml(err.message)}</p>`;
+  }
+}
+
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str ?? '';
+  return div.innerHTML;
+}
+
+document.getElementById('q').addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
+</script>
+</body>
+</html>

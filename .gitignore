@@ -1,0 +1,20 @@
+# Java / Maven
+search-api/target/
+
+# Lucene index (sinh ra khi chay, khong commit)
+search-api/data/index/
+
+# Crawler output (sinh ra khi chay)
+crawler/output/
+crawler/__pycache__/
+crawler/.venv/
+
+# OS
+.DS_Store
+
+# IDE
+.idea/
+*.iml
+*.md
+*.png
+.claude/*
