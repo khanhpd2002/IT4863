@@ -22,10 +22,12 @@ public class IndexingService {
 
     private final Directory directory;
     private final Analyzer analyzer;
+    private final IndexExportService exportService;
 
-    public IndexingService(Directory directory, Analyzer analyzer) {
+    public IndexingService(Directory directory, Analyzer analyzer, IndexExportService exportService) {
         this.directory = directory;
         this.analyzer = analyzer;
+        this.exportService = exportService;
     }
 
     /** @return so document da index */
@@ -43,8 +45,10 @@ public class IndexingService {
                 writer.updateDocument(new Term("id", safe(doc.getId())), luceneDoc);
             }
             writer.commit();
-            return documents.size();
         }
+        // Sinh lai file chi muc ngua readable moi khi index thay doi, de luon dong bo voi index that.
+        exportService.exportToFile();
+        return documents.size();
     }
 
     private String safe(String value) {
