@@ -2,15 +2,48 @@ server:
   # 8088 thay vi 8080/3000 de tranh dung voi cac service khac hay chay san tren may.
   port: ${SERVER_PORT:8088}
 
+spring:
+  servlet:
+    multipart:
+      # Mac dinh Spring Boot gioi han 1MB/file, 10MB/request - qua nho cho PDF that (vd. van
+      # ban quy che ~1-2MB). Nang len de POST /api/documents nhan duoc PDF thuc te.
+      max-file-size: 20MB
+      max-request-size: 50MB
+  data:
+    mongodb:
+      # MongoDB chay bang docker compose (search-api/docker-compose.yml). serverSelectionTimeoutMS
+      # = 5s de khi Mongo chua bat, API boc tach bao loi nhanh thay vi treo 30s mac dinh.
+      # Spring khong ket noi Mongo luc khoi dong -> phan tim kiem Lucene van chay khi Mongo tat.
+      uri: ${MONGODB_URI:mongodb://localhost:27017/it4863?serverSelectionTimeoutMS=5000}
+
 app:
   lucene:
     # Thu muc luu Lucene index, nam trong search-api/ (coi search-api la 1 repo nho, tu chua).
     index-dir: ${LUCENE_INDEX_DIR:data/index}
     # File text readable chua chi muc nguoc (term -> danh sach tai lieu + tf), tu dong sinh
-    # lai moi khi index tai lieu (xem IndexingService), hoac goi GET /api/index/export /
-    # CLI "export-index" de sinh lai thu cong.
+    # lai moi khi index tai lieu (xem IndexingService), hoac goi GET /api/index/export de sinh
+    # lai thu cong.
     export-file: ${INDEX_EXPORT_FILE:data/inverted_index.txt}
   data:
-    # Thu muc chua file .txt/.doc/.docx/.json de import hang loat qua /api/documents/import-raw
-    # hoac qua CLI (profile "cli", lenh "index"). Cung nam trong search-api/.
+    # Thu muc chua file .txt/.doc/.docx/.pdf/.json de import hang loat qua
+    # POST /api/documents/import-raw. Cung nam trong search-api/.
     raw-dir: ${RAW_DATA_DIR:data/raw}
+  mongo-search:
+    # Lucene index rieng cho /api/mongo-search, build tu du lieu MongoDB (collection resources).
+    # Tach biet voi app.lucene.index-dir (index cua /api/search tren file data/raw).
+    index-dir: ${MONGO_SEARCH_INDEX_DIR:data/index-mongo}
+  extract:
+    # Boc tach noi dung tu danh sach link (POST /api/extract), xem package extract.
+    # File danh sach URL dau vao tren server: moi dong 1 URL, dong bat dau bang '#' la chu thich.
+    # POST /api/extract doc file nay (khong nhan body) - muon doi URL thi sua file.
+    urls-file: ${EXTRACT_URLS_FILE:data/extract-urls.txt}
+    # 0 = chi tai URL dau vao; 1 = tai them trang/PDF ma URL dau vao lien ket toi.
+    max-depth: ${EXTRACT_MAX_DEPTH:1}
+    # So lien ket (trang/PDF) toi da duoc tai tiep tu moi trang - tranh trang co hang tram link.
+    # Moi lien ket van duoc ghi vao do thi, gioi han nay chi ap dung cho viec tai noi dung.
+    max-outlinks-per-page: ${EXTRACT_MAX_OUTLINKS_PER_PAGE:10}
+    # Tong so URL (khong tinh URL dau vao) toi da duoc tai trong 1 lan chay.
+    max-pages: ${EXTRACT_MAX_PAGES:50}
+    max-bytes: ${EXTRACT_MAX_BYTES:26214400}
+    timeout-seconds: ${EXTRACT_TIMEOUT_SECONDS:15}
+    user-agent: "Mozilla/5.0 (compatible; IT4863-BTL-Extractor/1.0)"

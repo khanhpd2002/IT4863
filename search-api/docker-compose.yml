@@ -1,0 +1,29 @@
+# MongoDB chay local cho chuc nang boc tach noi dung tu danh sach link (package extract).
+#
+#   cd search-api
+#   docker compose up -d          # khoi dong
+#   docker compose down           # dung (du lieu van con trong data/mongo)
+#   rm -rf data/mongo             # xoa sach du lieu -> lan up sau chay lai script init
+#
+# Script trong mongo/init/ CHI chay o lan khoi dong dau tien (khi data/mongo con rong) - tao
+# collection kem $jsonSchema validator + index. App van tu ensureIndex khi chay, nen xoa
+# data/mongo khong lam hong app.
+services:
+  mongo:
+    image: mongo:7.0
+    container_name: it4863-mongo
+    restart: unless-stopped
+    ports:
+      # Chi bind 127.0.0.1: Mongo khong bat auth (moi truong dev local), khong expose ra LAN.
+      - "127.0.0.1:27017:27017"
+    environment:
+      # Database ma cac script trong /docker-entrypoint-initdb.d dung lam bien `db`.
+      MONGO_INITDB_DATABASE: it4863
+    volumes:
+      - ./data/mongo:/data/db
+      - ./mongo/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 5

@@ -1,7 +1,7 @@
 package com.hust.it4863.searchapi.config;
 
+import com.hust.it4863.searchapi.analysis.VietnameseAnalyzer;
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,6 +28,8 @@ public class LuceneConfig {
 
     @Bean
     public Analyzer luceneAnalyzer() {
-        return new StandardAnalyzer();
+        // Tach tu + bo dau + lowercase, de tim kiem khong phan biet co dau/khong dau,
+        // hoa/thuong (vd: "Nhật Bản", "nhat ban", "NHAT BAN" deu khop nhau).
+        return new VietnameseAnalyzer();
     }
 }

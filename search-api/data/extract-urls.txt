@@ -1,0 +1,24 @@
+# Danh sach URL dau vao cho POST /api/extract (doc file nay, khong nhan body).
+https://ctt.hust.edu.vn/DisplayWeb/DisplayBaiViet?baiviet=39195
+https://ctt.hust.edu.vn/DisplayWeb/DisplayBaiViet?baiviet=39230
+https://ctt.hust.edu.vn/DisplayWeb/DisplayBaiViet?baiviet=39254
+https://ctt.hust.edu.vn/DisplayWeb/DisplayBaiViet?baiviet=40330
+https://ctt.hust.edu.vn/DisplayWeb/DisplayBaiViet?baiviet=43409
+https://ctt.hust.edu.vn/DisplayWeb/DisplayBaiViet?baiviet=43417
+https://ctt.hust.edu.vn/DisplayWeb/DisplayBaiViet?baiviet=43454
+https://ctt.hust.edu.vn/DisplayWeb/DisplayBaiViet?baiviet=43456
+https://ctt.hust.edu.vn/DisplayWeb/DisplayBaiViet?baiviet=43466
+https://ctt.hust.edu.vn/DisplayWeb/DisplayBaiViet?baiviet=44562
+https://ctt.hust.edu.vn/DisplayWeb/DisplayBaiViet?baiviet=46612
+https://ctt.hust.edu.vn/DisplayWeb/DisplayKehoach?kehoach=25167
+https://ctt.hust.edu.vn/DisplayWeb/DisplayKehoach?kehoach=25191
+https://ctt.hust.edu.vn/Services
+https://ctt.hust.edu.vn/Upload/Nguy%E1%BB%85n%20Vi%E1%BB%87t%20Ti%E1%BA%BFn/files/635_Thu%20ngo%20tuyen%20dung_Truong%20DH%20Bach%20khoa%20Ha%20Noi.pdf
+https://ctt.hust.edu.vn/Upload/Nguy%E1%BB%85n%20Vi%E1%BB%87t%20Ti%E1%BA%BFn/files/TH%C3%94NG%20B%C3%81O%20TUY%E1%BB%82N%20D%E1%BB%A4NG%20DAIZO%20TEC.pdf
+https://ctt.hust.edu.vn/Upload/Nguy%E1%BB%85n%20Vi%E1%BB%87t%20Ti%E1%BA%BFn/files/TH%C3%94NG%20TIN%20TUY%E1%BB%82N%20D%E1%BB%A4NG%20SINH%20VI%C3%8AN%20N%C4%82M%202025_,.docx
+https://ctt.hust.edu.vn/Upload/Nguyen%20Viet%20Tien/files/%E3%80%90Th%C3%B4ng%20tin%20tuy%E1%BB%83n%20d%E1%BB%A5ng%E3%80%91%2004_C%C3%B4ngt%20ty%20TAIYO%20SANGYO_VN%20.pdf
+https://ctt.hust.edu.vn/Upload/Nguyen%20Viet%20Tien/files/%E3%80%90Th%C3%B4ng%20tin%20tuy%E1%BB%83n%20d%E1%BB%A5ng%E3%80%9101_Horizon%20Inc__VN.pdf
+https://ctt.hust.edu.vn/Upload/Nguyen%20Viet%20Tien/files/%E3%80%90Th%C3%B4ng%20tin%20tuy%E1%BB%83n%20d%E1%BB%A5ng%E3%80%9102_C%C3%B4ng%20ty%20Earth-Tech_VN.pdf
+https://ctt.hust.edu.vn/Upload/Nguyen%20Viet%20Tien/files/%E3%80%90Th%C3%B4ng%20tin%20tuy%E1%BB%83n%20d%E1%BB%A5ng%E3%80%9103_MITSUBOSHI%20CO_,%20LTD__VN.pdf
+https://ctt.hust.edu.vn/Upload/Nguyen%20Viet%20Tien/files/%E3%80%90Th%C3%B4ng%20tin%20tuy%E1%BB%83n%20d%E1%BB%A5ng%E3%80%9105_Wabo%20Electronics%20Co_,Ltd_VN.pdf
+https://ctt.hust.edu.vn/Upload/Nguyen%20Viet%20Tien/files/1-Giay%20chung%20nhan%20SV%202020.doc

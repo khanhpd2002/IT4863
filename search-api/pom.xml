@@ -21,6 +21,9 @@
     <java.version>21</java.version>
     <lucene.version>9.11.1</lucene.version>
     <poi.version>5.3.0</poi.version>
+    <tika.version>2.9.2</tika.version>
+    <jsoup.version>1.18.1</jsoup.version>
+    <readability4j.version>1.0.8</readability4j.version>
   </properties>
 
   <dependencies>
@@ -45,6 +48,13 @@
       <artifactId>lucene-analysis-common</artifactId>
       <version>${lucene.version}</version>
     </dependency>
+    <!-- Highlighter: sinh snippet quanh vi tri tu khop that su, thay vi cat 200 ky tu dau
+         van ban co dinh (khong lien quan gi den query voi van ban dai, xem SearchService). -->
+    <dependency>
+      <groupId>org.apache.lucene</groupId>
+      <artifactId>lucene-highlighter</artifactId>
+      <version>${lucene.version}</version>
+    </dependency>
 
     <!-- Apache POI: .doc / .docx parsing -->
     <dependency>
@@ -61,6 +71,40 @@
       <groupId>org.apache.poi</groupId>
       <artifactId>poi-scratchpad</artifactId>
       <version>${poi.version}</version>
+    </dependency>
+
+    <!-- Apache Tika: parser cho .pdf (module rieng, chi keo theo PDFBox thay vi toan bo
+         tika-parsers-standard-package vi ta chi can ho tro dinh dang PDF). -->
+    <dependency>
+      <groupId>org.apache.tika</groupId>
+      <artifactId>tika-core</artifactId>
+      <version>${tika.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.tika</groupId>
+      <artifactId>tika-parser-pdf-module</artifactId>
+      <version>${tika.version}</version>
+    </dependency>
+
+    <!-- Boc tach noi dung tu danh sach link (HTML/PDF/anh) + luu MongoDB, xem package extract. -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-mongodb</artifactId>
+    </dependency>
+    <!-- Jsoup: parse HTML, lay meta (ngay dang/tac gia) va lien ket <a>/<img>. Khai bao ro
+         version vi Spring Boot khong quan ly jsoup, va de de len ban jsoup 1.11 cu ma
+         readability4j keo theo. -->
+    <dependency>
+      <groupId>org.jsoup</groupId>
+      <artifactId>jsoup</artifactId>
+      <version>${jsoup.version}</version>
+    </dependency>
+    <!-- Readability4J: ban Java cua Mozilla Readability (Firefox Reader View), tach noi dung
+         chinh cua bai viet khoi menu/quang cao/footer. -->
+    <dependency>
+      <groupId>net.dankito.readability4j</groupId>
+      <artifactId>readability4j</artifactId>
+      <version>${readability4j.version}</version>
     </dependency>
 
     <dependency>

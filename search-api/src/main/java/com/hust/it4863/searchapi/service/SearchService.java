@@ -23,14 +23,14 @@ import java.util.List;
 @Service
 public class SearchService {
 
-    private static final int SNIPPET_LENGTH = 200;
-
     private final Directory directory;
     private final Analyzer analyzer;
+    private final SnippetExtractor snippetExtractor;
 
-    public SearchService(Directory directory, Analyzer analyzer) {
+    public SearchService(Directory directory, Analyzer analyzer, SnippetExtractor snippetExtractor) {
         this.directory = directory;
         this.analyzer = analyzer;
+        this.snippetExtractor = snippetExtractor;
     }
 
     public List<SearchResultDTO> search(String queryText, int topN) throws IOException, ParseException {
@@ -52,16 +52,9 @@ public class SearchService {
                         doc.get("id"),
                         doc.get("title"),
                         scoreDoc.score,
-                        snippet(doc.get("content"))));
+                        snippetExtractor.snippets(query, "content", doc.get("content"))));
             }
             return results;
         }
-    }
-
-    private String snippet(String content) {
-        if (content == null) {
-            return "";
-        }
-        return content.length() > SNIPPET_LENGTH ? content.substring(0, SNIPPET_LENGTH) + "..." : content;
     }
 }

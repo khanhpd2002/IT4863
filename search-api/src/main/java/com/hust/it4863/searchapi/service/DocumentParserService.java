@@ -2,6 +2,7 @@ package com.hust.it4863.searchapi.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hust.it4863.searchapi.extract.PdfExtractor;
 import com.hust.it4863.searchapi.model.DocumentDTO;
 import com.hust.it4863.searchapi.model.OutLink;
 import org.apache.poi.hwpf.HWPFDocument;
@@ -28,6 +29,11 @@ import java.util.UUID;
 public class DocumentParserService {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
+    private final PdfExtractor pdfExtractor;
+
+    public DocumentParserService(PdfExtractor pdfExtractor) {
+        this.pdfExtractor = pdfExtractor;
+    }
 
     /** Mot file co the sinh ra 1 document (.txt/.doc/.docx) hoac nhieu document (.json dang mang). */
     public List<DocumentDTO> parse(String filename, InputStream input) throws IOException {
@@ -43,11 +49,13 @@ public class DocumentParserService {
             return List.of(parseDocx(filename, bytes));
         } else if (lower.endsWith(".doc")) {
             return List.of(parseDoc(filename, bytes));
+        } else if (lower.endsWith(".pdf")) {
+            return List.of(parsePdf(filename, bytes));
         } else if (lower.endsWith(".txt")) {
             return List.of(parseTxt(filename, bytes));
         }
         throw new IllegalArgumentException("Unsupported file type: " + filename
-                + " (chi ho tro .txt, .doc, .docx, .json)");
+                + " (chi ho tro .txt, .doc, .docx, .pdf, .json)");
     }
 
     private byte[] readAll(InputStream input) throws IOException {
@@ -76,6 +84,16 @@ public class DocumentParserService {
              HWPFDocument doc = new HWPFDocument(in);
              WordExtractor extractor = new WordExtractor(doc)) {
             return new DocumentDTO(filename, stripExtension(filename), extractor.getText(), List.of());
+        }
+    }
+
+    /** Dung Apache Tika (PDFParser, qua PdfExtractor) de trich text tu PDF. */
+    private DocumentDTO parsePdf(String filename, byte[] bytes) throws IOException {
+        try {
+            String text = pdfExtractor.extract(bytes).text();
+            return new DocumentDTO(filename, stripExtension(filename), text, List.of());
+        } catch (IOException e) {
+            throw new IOException("Loi parse PDF: " + filename, e);
         }
     }
 

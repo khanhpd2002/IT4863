@@ -43,7 +43,7 @@ async function doSearch() {
     resultsEl.innerHTML = data.map(r => `
       <div class="result">
         <strong>${escapeHtml(r.title)}</strong><span class="score">score=${r.score.toFixed(4)} (id=${escapeHtml(r.id)})</span>
-        <p>${escapeHtml(r.snippet)}</p>
+        ${(r.snippets || []).map(s => `<p>${escapeHtml(s)}</p>`).join('')}
       </div>
     `).join('');
   } catch (err) {
